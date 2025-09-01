@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  iOSToRasp
+
+  Created by Miguel Acosta Del Vecchio on 8/31/25.
+  
+*/
+
+// welcome sheet
+
+"iosToRasp_name" = "RaspPi Boost";
+
+"welcome_header_1" = "Connect Instantly via Bluetooth";
+"welcome_subtitle_1" = "Pair your Apple Device with your Raspberry Pi using BLE — no setup headaches.";
+
+"welcome_header_2" = "Control GPIO Pins with Ease";
+"welcome_subtitle_2" = "Remotely toggle outputs, sensors, and other hardware in real-time.";
+
+"welcome_header_3" = "Run Custom Commands";
+"welcome_subtitle_3" = "Send personalized instructions for your Pi to execute on demand.";
+
+"get_started" = "Get Started";
