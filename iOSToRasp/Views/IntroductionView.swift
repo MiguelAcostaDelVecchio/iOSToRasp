@@ -47,11 +47,11 @@ struct IntroductionView: View {
             .frame(maxWidth: .infinity, alignment: .center)
 
             VStack(alignment: .center, spacing: 22) {
-                Label("Fully open-source under MIT license", systemImage: "checkmark.seal")
+                Label("Open-souce under GNU General Public License v3.0", systemImage: "checkmark.seal")
                 Label("Easy to contribute — SwiftUI, BLE, Raspberry Pi", systemImage: "hammer")
                 Label("Build your own modules or improve existing ones", systemImage: "puzzlepiece.extension")
 
-                Link(destination: URL(string: "https://github.com/your-username/iOSToRasp")!) {
+                Link(destination: URL(string: "https://github.com/MiguelAcostaDelVecchio/iOSToRasp")!) {
                     HStack(spacing: 6) {
                         Image(systemName: "link")
                         Text("View on GitHub")

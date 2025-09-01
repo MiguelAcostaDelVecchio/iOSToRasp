@@ -30,7 +30,7 @@ class OverallTransactionManager: ObservableObject {
 struct HomeView: View {
     @EnvironmentObject var bluetoothViewModel: BluetoothViewModel
     
-    @State var currentTab = "Log"
+    @State var currentTab = "ble"
     
     var topEdge: CGFloat
     var bottomEdge: CGFloat
@@ -57,23 +57,45 @@ struct HomeView: View {
     }
     
     var body: some View {
-        List {
-            Section() {
-                ForEach(bluetoothViewModel.peripherals, id: \.identifier) { peripheral in
-                    
-                    if let _ = peripheral.name { // check if bluetooth device has a name in the advertisement packet
-                        if peripheral.state == .connected { // if connected to device, view the device's information
-                            NavigationLink(
-                                destination: DeviceInformationView(peripheral: peripheral).environmentObject(bluetoothViewModel),
-                                label: {PeripheralButton(peripheral: peripheral).environmentObject(bluetoothViewModel)}
-                            )
-                        } else {
-                            PeripheralButton(peripheral: peripheral).environmentObject(bluetoothViewModel)
+        NavigationStack {
+            List {
+                Section() {
+                    ForEach(bluetoothViewModel.peripherals, id: \.identifier) { peripheral in
+                        
+                        if let _ = peripheral.name { // check if bluetooth device has a name in the advertisement packet
+                            if peripheral.state == .connected { // if connected to device, view the device's information
+                                NavigationLink(
+                                    destination: DeviceInformationView(peripheral: peripheral).environmentObject(bluetoothViewModel),
+                                    label: {PeripheralButton(peripheral: peripheral).environmentObject(bluetoothViewModel)}
+                                )
+                            } else {
+                                PeripheralButton(peripheral: peripheral).environmentObject(bluetoothViewModel)
+                            }
                         }
+                        
+                    } // end of ForEach
+                } // end of section
+            } // end of list
+            .toolbar {
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Bluetooth Devices")
+                        .font(.title)
+                        .foregroundStyle(Color.white)
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        // Put link here to set up instructions for raspberry pi
+                        print("question mark was pressed")
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                            .imageScale(.large)
+                            .bold()
                     }
-                    
-                } // end of ForEach
-            } // end of section
-        } // end of list
+                }
+            }
+        }
+        
     }
 }
