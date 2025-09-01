@@ -11,6 +11,7 @@ import CoreBluetooth
 struct PeripheralButton: View {
     @EnvironmentObject var bluetoothViewModel: BluetoothViewModel
     var peripheral: CBPeripheral
+    @State private var isConnecting: Bool = false
     
     var body: some View {
         HStack {
@@ -21,17 +22,26 @@ struct PeripheralButton: View {
                     .foregroundColor(.gray)
             }
             Spacer()
-            Button(action: {
-                if peripheral.state == .connected {
-                    //bluetoothViewModel.disconnect(from: peripheral)
-                } else {
-                    bluetoothViewModel.connect(to: peripheral)
+            if isConnecting && peripheral.state != .connected {
+                ProgressView()
+            } else {
+                Button(action: {
+                    if peripheral.state == .connected {
+                        // bluetoothViewModel.disconnect(from: peripheral)
+                    } else {
+                        isConnecting = true
+                        bluetoothViewModel.connect(to: peripheral)
+                    }
+                }) {
+                    Text(peripheral.state == .connected ? "" : "Connect")
+                        .foregroundColor(.blue)
                 }
-            }) {
-                Text(peripheral.state == .connected ? "" : "Connect")
-                    .foregroundColor(.blue)
             }
-        } // end of Hstack
+        }
+        .onChange(of: peripheral.state) { newState in
+            if newState != .connecting {
+                isConnecting = false
+            }
+        }
     }
 }
-

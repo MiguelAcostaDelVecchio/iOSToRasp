@@ -20,3 +20,9 @@
 "welcome_subtitle_3" = "Send personalized instructions for your Pi to execute on demand.";
 
 "get_started" = "Get Started";
+
+// Services
+"gpio_control_service" = "4f047921-f9bf-4aa6-8fe2-5346412d82a8";
+
+// Characteristics
+"toggle_gpio_pin" = "dc5e32a4-aee2-4e0a-882f-d16d4862d3c3";

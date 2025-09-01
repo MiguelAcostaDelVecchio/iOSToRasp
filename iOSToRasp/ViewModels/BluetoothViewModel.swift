@@ -19,10 +19,19 @@ class BluetoothViewModel: NSObject, ObservableObject {
     }
     
     func writeToPeripheral(peripheral: CBPeripheral, data: Data) {
-        if let service = peripheral.services?.first(where: { $0.uuid == CBUUID(string: "1802") }),
-           let characteristic = service.characteristics?.first(where: { $0.uuid == CBUUID(string: "2A06") }) {
+        if let service = peripheral.services?.first(where: { $0.uuid == CBUUID.fromLocalizedKey("gpio_control_service") }),
+           let characteristic = service.characteristics?.first(where: { $0.uuid == CBUUID.fromLocalizedKey("toggle_gpio_pin") }) {
             peripheral.writeValue(data, for: characteristic, type: .withoutResponse)
         }
+    }
+    
+    func refreshPeripherals() {
+        centralManager?.stopScan()
+
+        // Keep connected peripherals
+        peripherals = peripherals.filter { $0.state == .connected }
+
+        centralManager?.scanForPeripherals(withServices: nil)
     }
 }
 
@@ -37,7 +46,7 @@ extension BluetoothViewModel: CBCentralManagerDelegate {
         if !peripherals.contains(peripheral) {
             peripheral.delegate = self
             self.peripherals.append(peripheral)
-            print("Discovered peripheral: \(peripheral)")
+//            print("Discovered peripheral: \(peripheral)")
         }
     }
     

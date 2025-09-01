@@ -76,6 +76,12 @@ struct HomeView: View {
                     } // end of ForEach
                 } // end of section
             } // end of list
+            .onAppear {
+                bluetoothViewModel.refreshPeripherals()
+            }
+            .refreshable {
+                bluetoothViewModel.refreshPeripherals()
+            }
             .toolbar {
                 
                 ToolbarItem(placement: .topBarLeading) {

@@ -7,4 +7,10 @@
 //
 
 import Foundation
+import CoreBluetooth
 
+extension CBUUID {
+    static func fromLocalizedKey(_ key: String) -> CBUUID {
+        CBUUID(string: NSLocalizedString(key, comment: ""))
+    }
+}
