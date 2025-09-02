@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "bleno2": "^0.7.0",
+    "bluetooth-hci-socket2": "^0.7.0",
+    "onoff": "^5.0.1",
+    "node-gyp": "^7.1.2"
+  }
+}
